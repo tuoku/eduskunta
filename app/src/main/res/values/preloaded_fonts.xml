@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/alike</item>
+        <item>@font/amiko_semibold</item>
+        <item>@font/candal</item>
+        <item>@font/orienta</item>
+        <item>@font/spinnaker</item>
+        <item>@font/vollkorn_bold</item>
+    </array>
+</resources>
