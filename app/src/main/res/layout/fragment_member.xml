@@ -6,7 +6,10 @@
     <data>
         <variable
             name="member"
-            type="com.tuoku.parliament.models.ParliamentMember" />
+            type="com.tuoku.parliament.logic.models.ParliamentMember" />
+        <variable
+            name="memberFragmentViewModel"
+            type="com.tuoku.parliament.logic.viewmodels.MemberFragmentViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -61,7 +64,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/sheetshape"
-                android:orientation="horizontal"></LinearLayout>
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/ibStarred"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@drawable/ic_baseline_star_outline_24" />
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -131,7 +145,7 @@
                     android:id="@+id/tvLikes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0"
+                    android:text="@={member.likesAsString}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display3"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/fabDislike"
