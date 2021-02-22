@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuoku.parliament.R
 import com.tuoku.parliament.logic.models.ParliamentMember
 import com.tuoku.parliament.logic.services.api_services.SharedPreferencesAPI
@@ -44,9 +45,23 @@ class MainActivity : AppCompatActivity() {
 
         setNav(navController)
 
+        findViewById<BottomNavigationView>(R.id.bottomNav).setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.navigation_camera -> {
+                    navController.navigate(R.id.action_global_cameraFragment)
+                    true
+                }
+                R.id.navigation_members -> {
+                    navController.navigate(R.id.action_global_mainFragment)
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 //TODO: fetching resets favorites
-    suspend fun checkAndFetch(){
+    suspend  fun checkAndFetch(){
         // If members have never been fetched from API, or its been more than a week since last fetch we fetch them again
         Log.d("|||||||||||||||||||||||", SharedPreferencesAPI.getMillis().toString())
         if(System.currentTimeMillis() - SharedPreferencesAPI.getMillis() > (1000 * 60 * 60 * 24 * 7).toLong() || SharedPreferencesAPI.getMillis() == 0.toLong()){

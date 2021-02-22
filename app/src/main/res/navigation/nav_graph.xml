@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_memberFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_memberFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </dialog>
     <fragment
         android:id="@+id/mainFragment"
@@ -24,5 +27,39 @@
         <action
             android:id="@+id/action_mainFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+            app:enterAnim="@anim/slide_left"
+            app:exitAnim="@anim/slide_right" />
     </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.tuoku.parliament.views.ui.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_cameraFragment"
+        app:destination="@id/cameraFragment"
+        app:enterAnim="@anim/slide_right"
+        app:exitAnim="@anim/wait_anim"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/wait_anim"
+        app:popExitAnim="@anim/slide_left"
+        app:popUpTo="@id/mainFragment" />
+    <action
+        android:id="@+id/action_global_mainFragment"
+        app:destination="@id/mainFragment"
+        app:enterAnim="@anim/slide_left"
+        app:exitAnim="@anim/wait_anim"
+        app:launchSingleTop="true"
+        app:popEnterAnim="@anim/wait_anim"
+        app:popExitAnim="@anim/slide_right" />
 </navigation>
