@@ -60,7 +60,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-//TODO: fetching resets favorites
+
+
+    //TODO: fetching resets favorites
     suspend  fun checkAndFetch(){
         // If members have never been fetched from API, or its been more than a week since last fetch we fetch them again
         Log.d("|||||||||||||||||||||||", SharedPreferencesAPI.getMillis().toString())
