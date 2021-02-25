@@ -12,9 +12,14 @@
     tools:context=".views.ui.CameraFragment"
         android:id="@+id/container">
         <androidx.camera.view.PreviewView
-            android:id="@+id/previewView"
+            android:id="@+id/camView"
             android:layout_height="match_parent"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            />
+        <com.tuoku.parliament.logic.utils.GraphicOverlay
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                android:id="@+id/camOverlay"/>
 
 
 </FrameLayout>
