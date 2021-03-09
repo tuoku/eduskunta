@@ -1,29 +1,21 @@
 package com.tuoku.parliament.views.ui
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.preference.PreferenceManager
 import android.util.Log
-import android.view.View
-import android.widget.*
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tuoku.parliament.R
-import com.tuoku.parliament.logic.models.ParliamentMember
 import com.tuoku.parliament.logic.services.api_services.SharedPreferencesAPI
 import com.tuoku.parliament.logic.services.repositories.MembersRepo
-import com.tuoku.parliament.logic.utils.MemberAdapter
-import com.tuoku.parliament.logic.utils.MemberAdapter2
-import com.tuoku.parliament.logic.viewmodels.MainActivityViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,12 +24,23 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        SharedPreferencesAPI.setFile(getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE))
+        SharedPreferencesAPI.setFile(
+            getSharedPreferences(
+                "${packageName}_preferences",
+                Context.MODE_PRIVATE
+            )
+        )
         GlobalScope.launch {
             checkAndFetch()
         }
 
         setCon(this)
+
+        val flags =
+            WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION
+
+
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -90,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             context = con
         }
         fun getCon() = context
-        fun setNav(navv:NavController) {
+        fun setNav(navv: NavController) {
             nav = navv
         }
         fun getNav() = nav

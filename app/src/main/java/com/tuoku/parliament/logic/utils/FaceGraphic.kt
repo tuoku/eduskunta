@@ -20,12 +20,15 @@ package com.tuoku.parliament.logic.utils
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.view.View
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceLandmark
 import com.google.mlkit.vision.face.FaceLandmark.LandmarkType
+import java.util.ArrayList
 import java.util.Locale
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Graphic instance for rendering face position, contour, and landmarks within the associated
@@ -37,11 +40,13 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
     private val idPaints = Array(numColors) { Paint() }
     private val boxPaints = Array(numColors) { Paint() }
     private val labelPaints = Array(numColors) { Paint() }
+    val fface = face
 
     init {
         val selectedColor = Color.WHITE
         facePositionPaint = Paint()
         facePositionPaint.color = selectedColor
+
         for (i in 0 until numColors) {
             idPaints[i] = Paint()
             idPaints[i].color = COLORS[i][0]
@@ -55,6 +60,8 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
             labelPaints[i].style = Paint.Style.FILL
         }
     }
+    fun getFace() = fface
+
 
     /** Draws the face annotations for position on the supplied canvas.  */
     override fun draw(canvas: Canvas?) {
@@ -80,18 +87,14 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
         var yLabelOffset: Float = if (face.trackingId == null) 0f else -lineHeight
 
         // Decide color based on face ID
-        val colorID =
-            if (face.trackingId == null) 0 else abs(face.trackingId!! % NUM_COLORS)
+        val colorID = 0
+            //if (face.trackingId == null) 0 else abs(face.trackingId!! % NUM_COLORS)
 
         // Calculate width and height of label box
-        var textWidth = idPaints[colorID].measureText("ID: " + face.trackingId)
+        var textWidth = 0f
         if (face.smilingProbability != null) {
             yLabelOffset -= lineHeight
-            textWidth = max(
-                textWidth,
-                idPaints[colorID]
-                    .measureText(String.format(Locale.US, "Happiness: %.2f", face.smilingProbability))
-            )
+            textWidth = 0f
         }
         if (face.leftEyeOpenProbability != null) {
             yLabelOffset -= lineHeight
@@ -119,22 +122,15 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
         // Draw labels
         canvas?.drawRect(
             left - BOX_STROKE_WIDTH,
-            top + yLabelOffset,
+            top,
             left + textWidth + 2 * BOX_STROKE_WIDTH,
             top,
             labelPaints[colorID]
         )
+
         yLabelOffset += ID_TEXT_SIZE
         canvas?.drawRect(left, top, right, bottom, boxPaints[colorID])
-        if (face.trackingId != null) {
-            canvas?.drawText(
-                "ID: " + face.trackingId,
-                left,
-                top + yLabelOffset,
-                idPaints[colorID]
-            )
-            yLabelOffset += lineHeight
-        }
+
 
         // Draws all face contours.
         for (contour in face.allContours) {
@@ -231,6 +227,7 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
         }
     }
 
+
     private fun drawFaceLandmark(canvas: Canvas, @LandmarkType landmarkType: Int) {
         val faceLandmark = face.getLandmark(landmarkType)
         if (faceLandmark != null) {
@@ -244,10 +241,12 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
     }
 
     companion object {
+        val faces: MutableList<Face> =
+            ArrayList<Face>()
         private const val FACE_POSITION_RADIUS = 8.0f
         private const val ID_TEXT_SIZE = 30.0f
         private const val ID_Y_OFFSET = 40.0f
-        private const val BOX_STROKE_WIDTH = 5.0f
+        private const val BOX_STROKE_WIDTH = 10.0f
         private const val NUM_COLORS = 10
         private val COLORS =
             arrayOf(

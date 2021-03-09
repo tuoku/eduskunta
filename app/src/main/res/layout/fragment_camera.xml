@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
         <data>
                 <variable
                     name="cameraFragmentViewModel"
                     type="com.tuoku.parliament.logic.viewmodels.CameraFragmentViewModel" />
         </data>
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.ui.CameraFragment"
-        android:id="@+id/container">
-        <androidx.camera.view.PreviewView
-            android:id="@+id/camView"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            />
-        <com.tuoku.parliament.logic.utils.GraphicOverlay
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-                android:id="@+id/camOverlay"/>
+            tools:context=".views.ui.CameraFragment">
+
+                <androidx.camera.view.PreviewView
+                    android:id="@+id/camView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </androidx.camera.view.PreviewView>
+
+                <com.tuoku.parliament.logic.utils.GraphicOverlay
+                    android:id="@+id/camOverlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/camView"
+                    app:layout_constraintTop_toTopOf="@+id/camView" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
 
-</FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -9,6 +9,7 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelStoreOwner
@@ -50,6 +51,8 @@ class MemberAdapter(private var dataSet: List<ParliamentMember>) :
         viewHolder.tv.text = "${dataSet?.get(position)?.lastname}, ${dataSet?.get(position)?.firstname}"
         Glide.with(MainActivity.getCon()).load("https://avoindata.eduskunta.fi/${dataSet?.get(position)?.pictureUrl}").into(viewHolder.imgg)
         viewHolder.likes.setText(dataSet?.get(position)?.likes.toString())
+
+//        FaceModels.portraits.put(viewHolder.imgg.drawable.toBitmap(),dataSet?.get(position)?.hetekaId)
         viewHolder.tv.setOnClickListener{
             /*
             val sheet = MemberFragment.newInstance(

@@ -59,4 +59,8 @@ import com.tuoku.parliament.views.ui.MainActivity
 
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = dataSet?.size ?: 0
+
+        override fun getItemId(position: Int): Long {
+            return dataSet?.get(position)?.hetekaId?.toLong() ?: 0
+        }
     }

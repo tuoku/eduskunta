@@ -4,8 +4,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import com.tuoku.parliament.logic.utils.FaceGraphic.Companion.faces
 import com.tuoku.parliament.logic.utils.GraphicOverlay.Graphic
+import com.tuoku.parliament.views.ui.MainActivity
 import java.util.*
 
 /*
@@ -49,7 +53,7 @@ import java.util.*
 class GraphicOverlay(context: Context?, attrs: AttributeSet?) :
     View(context, attrs) {
     private val lock = Any()
-    private val graphics: MutableList<GraphicOverlay.Graphic> =
+    val graphics: MutableList<GraphicOverlay.Graphic> =
         ArrayList<GraphicOverlay.Graphic>()
 
     // Matrix for transforming from image coordinates to overlay view coordinates.
@@ -93,6 +97,7 @@ class GraphicOverlay(context: Context?, attrs: AttributeSet?) :
          * @param canvas drawing canvas
          */
         abstract fun draw(canvas: Canvas?)
+
 
         /** Adjusts the supplied value from the image scale to the view scale.  */
         fun scale(imagePixel: Float): Float {
@@ -141,6 +146,7 @@ class GraphicOverlay(context: Context?, attrs: AttributeSet?) :
     fun clear() {
         synchronized(lock) { graphics.clear() }
         postInvalidate()
+        faces.clear()
     }
 
     /** Adds a graphic to the overlay.  */

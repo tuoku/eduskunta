@@ -233,6 +233,7 @@ abstract class VisionProcessorBase<T>(context: Context) : VisionImageProcessor {
                     )
                 )
             }
+            /*
             graphicOverlay.add(
                 InferenceInfoGraphic(
                     graphicOverlay,
@@ -241,6 +242,8 @@ abstract class VisionProcessorBase<T>(context: Context) : VisionImageProcessor {
                     if (shouldShowFps) framesPerSecond else null
                 )
             )
+
+             */
             this@VisionProcessorBase.onSuccess(results, graphicOverlay)
             graphicOverlay.postInvalidate()
         }
