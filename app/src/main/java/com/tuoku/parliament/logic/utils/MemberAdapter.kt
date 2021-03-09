@@ -9,30 +9,25 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.graphics.drawable.toBitmap
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tuoku.parliament.R
 import com.tuoku.parliament.logic.models.ParliamentMember
-import com.tuoku.parliament.logic.services.repositories.MembersRepo.allMembers
 import com.tuoku.parliament.views.ui.MainActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 class MemberAdapter(private var dataSet: List<ParliamentMember>) :
-    RecyclerView.Adapter<MemberAdapter.ViewHolder>(), Filterable{
+    RecyclerView.Adapter<MemberAdapter.ViewHolder>(), Filterable {
 
     var memberFilterList = listOf<ParliamentMember>()
 
-        class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-            val tv:TextView = view.findViewById(R.id.LItvName)
-            val parent:CardView = view.findViewById(R.id.cvRvAll)
-            val likes:TextView = view.findViewById(R.id.LItvLikes)
-            val imgg:ImageView = view.findViewById(R.id.LIivImg)
-        }
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tv: TextView = view.findViewById(R.id.LItvName)
+        val parent: CardView = view.findViewById(R.id.cvRvAll)
+        val likes: TextView = view.findViewById(R.id.LItvLikes)
+        val imgg: ImageView = view.findViewById(R.id.LIivImg)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         // Create a new view, which defines the UI of the list item
@@ -47,13 +42,16 @@ class MemberAdapter(private var dataSet: List<ParliamentMember>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-      //  viewHolder.parent.animation = android.view.animation.AnimationUtils.loadAnimation(viewHolder.itemView.context,R.anim.rv_all_anim)
-        viewHolder.tv.text = "${dataSet?.get(position)?.lastname}, ${dataSet?.get(position)?.firstname}"
-        Glide.with(MainActivity.getCon()).load("https://avoindata.eduskunta.fi/${dataSet?.get(position)?.pictureUrl}").into(viewHolder.imgg)
-        viewHolder.likes.setText(dataSet?.get(position)?.likes.toString())
+        //  viewHolder.parent.animation = android.view.animation.AnimationUtils.loadAnimation(viewHolder.itemView.context,R.anim.rv_all_anim)
+        viewHolder.tv.text =
+            "${dataSet.get(position).lastname}, ${dataSet.get(position).firstname}"
+        Glide.with(MainActivity.getCon())
+            .load("https://avoindata.eduskunta.fi/${dataSet.get(position).pictureUrl}")
+            .into(viewHolder.imgg)
+        viewHolder.likes.text = dataSet.get(position).likes.toString()
 
 //        FaceModels.portraits.put(viewHolder.imgg.drawable.toBitmap(),dataSet?.get(position)?.hetekaId)
-        viewHolder.tv.setOnClickListener{
+        viewHolder.tv.setOnClickListener {
             /*
             val sheet = MemberFragment.newInstance(
                 dataSet.value!!.get(position),
@@ -62,14 +60,15 @@ class MemberAdapter(private var dataSet: List<ParliamentMember>) :
             sheet.show(managerr, sheet.tag)
             */
 
-            Log.d("TAP",dataSet?.get(position)?.fullname ?: "hmm")
-            MainActivity.getNav().navigate(R.id.memberFragment, bundleOf("id" to dataSet?.get(position)!!.hetekaId))
+            Log.d("TAP", dataSet.get(position).fullname)
+            MainActivity.getNav()
+                .navigate(R.id.memberFragment, bundleOf("id" to dataSet.get(position).hetekaId))
 
         }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet?.size ?: 0
+    override fun getItemCount() = dataSet.size
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -80,7 +79,9 @@ class MemberAdapter(private var dataSet: List<ParliamentMember>) :
                 } else {
                     val resultList = mutableListOf<ParliamentMember>()
                     for (m in dataSet) {
-                        if (m.fullname.toLowerCase(Locale.ROOT).contains(charSearch.toLowerCase(Locale.ROOT))) {
+                        if (m.fullname.toLowerCase(Locale.ROOT)
+                                .contains(charSearch.toLowerCase(Locale.ROOT))
+                        ) {
                             resultList.add(m)
                         }
                     }
@@ -98,6 +99,6 @@ class MemberAdapter(private var dataSet: List<ParliamentMember>) :
             }
 
         }
-        }
+    }
 
 }

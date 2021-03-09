@@ -29,6 +29,7 @@ class InferenceInfoGraphic(
     private val framesPerSecond: Int?
 ) : GraphicOverlay.Graphic(overlay) {
     private val textPaint: Paint
+
     @Synchronized
     override fun draw(canvas: Canvas?) {
         val x = TEXT_SIZE * 0.5f

@@ -4,12 +4,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.tuoku.parliament.logic.utils.FaceGraphic.Companion.faces
 import com.tuoku.parliament.logic.utils.GraphicOverlay.Graphic
-import com.tuoku.parliament.views.ui.MainActivity
 import java.util.*
 
 /*

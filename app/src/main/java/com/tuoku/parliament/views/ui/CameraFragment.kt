@@ -471,19 +471,6 @@ class CameraFragment : Fragment(), LifecycleOwner, View.OnTouchListener {
     companion object {
         private const val TAG = "CameraXLivePreview"
         private const val PERMISSION_REQUESTS = 1
-        private const val OBJECT_DETECTION = "Object Detection"
-        private const val OBJECT_DETECTION_CUSTOM = "Custom Object Detection (Bird)"
-        private const val CUSTOM_AUTOML_OBJECT_DETECTION = "Custom AutoML Object Detection (Flower)"
-        private const val FACE_DETECTION = "Face Detection"
-        private const val TEXT_RECOGNITION = "Text Recognition"
-        private const val BARCODE_SCANNING = "Barcode Scanning"
-        private const val IMAGE_LABELING = "Image Labeling"
-        private const val IMAGE_LABELING_CUSTOM = "Custom Image Labeling (Bird)"
-        private const val CUSTOM_AUTOML_LABELING = "Custom AutoML Image Labeling (Flower)"
-        private const val POSE_DETECTION = "Pose Detection"
-
-        private const val STATE_SELECTED_MODEL = "selected_model"
-        private const val STATE_LENS_FACING = "lens_facing"
 
         private fun isPermissionGranted(
             context: Context,

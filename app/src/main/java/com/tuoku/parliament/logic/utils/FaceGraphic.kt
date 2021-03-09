@@ -20,21 +20,18 @@ package com.tuoku.parliament.logic.utils
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.view.View
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceLandmark
 import com.google.mlkit.vision.face.FaceLandmark.LandmarkType
-import java.util.ArrayList
-import java.util.Locale
-import kotlin.math.abs
+import java.util.*
 import kotlin.math.max
-import kotlin.math.min
 
 /**
  * Graphic instance for rendering face position, contour, and landmarks within the associated
  * graphic overlay view.
  */
-class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) : GraphicOverlay.Graphic(overlay) {
+class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
+    GraphicOverlay.Graphic(overlay) {
     private val facePositionPaint: Paint
     private val numColors = COLORS.size
     private val idPaints = Array(numColors) { Paint() }
@@ -60,6 +57,7 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
             labelPaints[i].style = Paint.Style.FILL
         }
     }
+
     fun getFace() = fface
 
 
@@ -88,7 +86,7 @@ class FaceGraphic constructor(overlay: GraphicOverlay, private val face: Face) :
 
         // Decide color based on face ID
         val colorID = 0
-            //if (face.trackingId == null) 0 else abs(face.trackingId!! % NUM_COLORS)
+        //if (face.trackingId == null) 0 else abs(face.trackingId!! % NUM_COLORS)
 
         // Calculate width and height of label box
         var textWidth = 0f
