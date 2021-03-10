@@ -34,6 +34,7 @@ class InferenceInfoGraphic(
     override fun draw(canvas: Canvas?) {
         val x = TEXT_SIZE * 0.5f
         val y = TEXT_SIZE * 1.5f
+        /*
         canvas?.drawText(
             "InputImage size: " + overlay.imageHeight
                 .toString() + "x" + overlay.imageWidth,
@@ -59,6 +60,8 @@ class InferenceInfoGraphic(
                 "Detector latency: $detectorLatency ms", x, y + TEXT_SIZE * 2, textPaint
             )
         }
+
+         */
     }
 
     companion object {

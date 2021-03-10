@@ -1,15 +1,11 @@
 package com.tuoku.parliament.logic.viewmodels
 
-import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.*
 import com.tuoku.parliament.logic.models.ParliamentMember
-import com.tuoku.parliament.logic.services.api_services.ParliamentAPI
 import com.tuoku.parliament.logic.services.repositories.MembersRepo
-import com.tuoku.parliament.logic.utils.Repository
 import com.tuoku.parliament.views.ui.MemberFragment
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class MainActivityViewModel: ViewModel() {
 

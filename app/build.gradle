@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'com.chaquo.python'
 }
 
 android {
@@ -15,22 +14,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        python{
-            pip{
-                install "dlib"
-                install "opencv-python"
-                install "opencv-contrib-python"
-                install "requests"
-                install "face_recognition"
-                install "pillow"
-                install "numpy"
-                install "scipy"
-            }
-        }
-        ndk{
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-        }
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

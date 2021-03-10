@@ -3,10 +3,6 @@ package com.tuoku.parliament.logic.services.api_services
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tuoku.parliament.logic.models.ParliamentMember
-import com.tuoku.parliament.logic.utils.hasNetwork
-import com.tuoku.parliament.views.ui.MainActivity
-import okhttp3.Cache
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
